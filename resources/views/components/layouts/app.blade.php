@@ -11,6 +11,6 @@
     <body>
             <livewire:header />
             {{ $slot }}
-
+            <livewire:footer />
     </body>
 </html>
