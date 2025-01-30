@@ -14,7 +14,7 @@ use App\Livewire\ManageCategories;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\ShoppingCartComponent;
 use App\Livewire\Checkout;
-
+use App\Livewire\PaymentComponent;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,8 +45,18 @@ Route::group(['middleware' => 'admin'], function () {
     //editing products
     Route::get('/edit/{id}/product', EditProduct::class);
 });
-Route::get('/cart', ShoppingCartComponent::class)->name('cart');
+Route::get('/payment', PaymentComponent::class)->name('payment');
+Route::get('/checkout', Checkout::class)->name('checkout');
+Route::get('/checkout/success', function () {
+    return view('checkout-success');
+})->name('checkout.success');
 
-// Checkout Route
-Route::get('/checkout', Checkout::class)->name('checkout.page');
-Route::post('/checkout', [Checkout::class, 'checkout'])->name('checkout.submit');
+Route::get('/checkout/cancel', function () {
+    return view('checkout-cancel');
+})->name('checkout.cancel');
+
+// Route::get('/cart', ShoppingCartComponent::class)->name('cart');
+
+// // Checkout Route
+// Route::get('/checkout', Checkout::class)->name('checkout.page');
+// Route::post('/checkout', [Checkout::class, 'checkout'])->name('checkout.submit');

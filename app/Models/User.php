@@ -32,4 +32,18 @@ class User extends AuthUser
             'password' => 'hashed',
         ];
     }
+
+    // Define relationship with ShoppingCart model
+    public function cart()
+    {
+        return $this->hasMany(ShoppingCart::class);
+    }
+
+    // Calculate the total price of the cart
+    public function cartTotal()
+    {
+        return $this->cart()->with('product')->get()->sum(function ($cartItem) {
+            return $cartItem->product->price * $cartItem->quantity;
+        });
+    }
 }
